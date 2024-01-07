@@ -1,5 +1,4 @@
 
-import PostThread from "@/components/forms/PostThread";
 import ProfileHeader from "@/components/shared/ProfileHeader";
 import ThreadsTab from "@/components/shared/ThreadsTab";
 import { TabsContent } from "@/components/ui/tabs";
