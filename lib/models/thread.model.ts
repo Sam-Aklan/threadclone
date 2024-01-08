@@ -20,8 +20,10 @@ const threadSchema = new mongoose.Schema({
     type: String
    },
    childern: [
-    {type: mongoose.Schema.Types.ObjectId,
-    ref: "Thread"}
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Thread"
+   }
    ]
         
     

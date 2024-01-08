@@ -5,18 +5,22 @@ import { TabsContent } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs"
-import { Tabs, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
     
 const Page = async({params}:{params:{id:string}}) => {
-    const user = await currentUser()
 
+    const user = await currentUser()
+    // console.log(`user info in the profile page:${user}`)
+    console.log(`page id = ${params.id}`)
+    console.log()
     if(!user) return null;
 
     const userInfo = await fetchUser(params.id)
     if(!userInfo?.onboarded) redirect('/onboarding')
   return (
+
     <section>
         <ProfileHeader
         accountId = {userInfo.id}
@@ -28,11 +32,12 @@ const Page = async({params}:{params:{id:string}}) => {
         <div className="mt-9">
             <Tabs defaultValue="threads"
             className="w-full">
-                <TabsList>
+                <TabsList className="tab">
                     {
                       profileTabs.map(tab=>(
                         <TabsTrigger key={tab.label}
-                        value={tab.value}>
+                        value={tab.value} 
+                        className="tab">
                           <Image
                           src={tab.icon}
                           alt={tab.label}

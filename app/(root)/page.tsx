@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs";
 
 export default async function Home() {
   const user = await currentUser()
-  // if (!user) return null;
+  if (!user) return null;
   const result = await fetchPost(1,30)
   // console.log(`home page posts: ${result.posts['author']}`)
   return (

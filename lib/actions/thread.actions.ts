@@ -56,14 +56,15 @@ export async function fetchPost(pageNumber=1, pageSize = 20) {
     })
 
     const posts = await postQuery.exec()
-    console.log(posts)
+    // console.log(posts)
     const totalPostCount = await Thread.countDocuments({parentId: {$in:[null,undefined]}})
 
     
-    console.log(`fetch post: ${posts}`)
+    // console.log(`fetch post: ${posts}`)
     const isNext = totalPostCount > skipAmount + posts.length
     return {posts, isNext}
     } catch (error: any) {
+        console.log('an error accuired during post fetch: profile page')
         throw new Error(`failed to fetch post: ${error.message}`)
     }
 }

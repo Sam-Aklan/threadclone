@@ -67,7 +67,7 @@ export async function fetchUserPost(userId:string) {
             path: 'threads',
             model: Thread,
             populate:{
-                path: 'children',
+                path: 'childern',
                 model: Thread,
                 populate:{
                     path: 'author',
@@ -76,6 +76,7 @@ export async function fetchUserPost(userId:string) {
                 }
             }
         })
+        
         return threads
     } catch (error:any) {
         throw new Error(`faied to return threads: ${error.message}`)
