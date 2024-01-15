@@ -14,31 +14,29 @@ import { Textarea } from '../ui/textarea';
 import { Button } from "@/components/ui/button"
 import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from "@/lib/validations/thread";
-import { createThread } from "@/lib/actions/thread.actions";
-import { useOrganization } from "@clerk/nextjs";
+import { updateThread } from "@/lib/actions/thread.actions";
 
 
-const PostThread = ({userId}:{userId: string}) => {
+
+
+const EditThread = ({text,accountId,id}:{text: string,accountId:string,id:string}) => {
 const pathname = usePathname()
 const router = useRouter()
-const { organization } = useOrganization()
+
+ 
 
 const form = useForm({
     resolver: zodResolver(ThreadValidation),
     defaultValues:{
-      thread: '',
-      accountId: userId
+      thread: text,
+      accountId: accountId
+      
     }
   })
 
   const onSubmit = async(values: z.infer<typeof ThreadValidation>) =>{
+    await updateThread({ThreadId:id, content:values.thread})
     
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: organization? organization.id: null, 
-      path: pathname
-    })
     router.push('/')
   }
 
@@ -64,7 +62,7 @@ const form = useForm({
         )}
       />
       <Button type="submit" className="bg-primary-500">
-        Post thread
+        Update thread
       </Button>
     </form>
     
@@ -73,4 +71,4 @@ const form = useForm({
   )
 }
 
-export default PostThread
+export default EditThread

@@ -125,7 +125,7 @@ const router = useRouter()
         )}
       />
 
-      //field two
+      {/* field two */}
 
       <FormField
         control={form.control}
@@ -145,7 +145,7 @@ const router = useRouter()
           </FormItem>
         )}
       />
-// feild three
+ {/* field three */}
 
       <FormField
         control={form.control}
@@ -165,7 +165,7 @@ const router = useRouter()
           </FormItem>
         )}
       />
-      // feild four
+      {/* feild four */}
       <FormField
         control={form.control}
         name="bio"

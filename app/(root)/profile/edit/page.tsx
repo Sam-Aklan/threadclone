@@ -2,7 +2,9 @@ import AccountProfile from "@/components/forms/AccountProfile"
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs"
 
-async function Page(){
+export const page = async() => {
+ 
+
     const user =  await currentUser()
     if(!user) return null;
 
@@ -17,19 +19,20 @@ async function Page(){
         image: userInfo?.image || user?.imageUrl
 
     }
-    
-    return(
-        <main>
-            <h1 className="head-text">
-                onboarding
-            </h1>
-                <p className="mt-3">
-                    compelte your profile now to use Threads
-                </p>
-            <section>
-                <AccountProfile user={userData} btnTitle="Continue"/>
-            </section>
-        </main>
-    )
-}
-export default Page
+  return (
+    <>
+      <h1>Edit Profile</h1>
+      <p className="mt-3 text-base-regular text-light-2">
+        Make any changes
+      </p>
+
+      <section className="mt-12">
+        <AccountProfile
+        user={userData}
+        btnTitle="Continue"
+        />
+      </section>
+    </>
+  )
+  }
+export default page

@@ -8,13 +8,13 @@ import { redirect } from "next/navigation";
 
 const Page = async({params}:{params:{id:string}}) => {
   const user = await currentUser()
-  
+  console.log(`params  ${params.id}`)
   if(!params.id) return null;
   if(!user) return null;
   const userInfo = await fetchUser(user.id)
   if(!userInfo.onboarded) redirect('/onboarding')
   const thread = await fetchThreadById(params.id)
-  // console.log(`thread content in thread id ${thread}`)
+  console.log(`thread content in thread id ${thread}`)
   return (
     <section className="relative">
         <div>{
@@ -23,7 +23,7 @@ const Page = async({params}:{params:{id:string}}) => {
               key={thread._id}
               id={thread._id}
               currentUserId={user?.id ||''}
-              parenhtId={thread.parentId}
+              parentId={thread.parentId}
               content={thread.text}
               author={thread.author}
               community={thread.community}
